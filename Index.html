@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mani Kanta Lokesh – Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { background-color: #121212; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; transition: background-color .3s, color .3s; }
+    body.light { background-color: #f8f9fa; color: #212529; }
+    .navbar-brand { font-weight: bold; letter-spacing: 1px; }
+    .hero {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1.5rem 1rem;
+      background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+      border-radius: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .hero img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-right: 1rem;
+    }
+    .hero img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-left: 1rem;
+    }
+    .hero div {
+      order: 1;
+      flex: 1;
+    }
+    body.light .hero {
+      background: linear-gradient(135deg, #e9ecef, #dee2e6);
+    }
+    body.light .hero { background:linear-gradient(135deg,#e9ecef,#dee2e6); }
+    .hero h1 { color:#fff; font-size:3rem; margin-bottom:.5rem; }
+    body.light .hero h1 { color:#212529; }
+    .hero p { color:#bbb; font-size:1.2rem; }
+    body.light .hero p { color:#495057; }
+    .project-card { background-color:#1f1f1f; border:none; border-radius:.5rem; transition:transform .3s,box-shadow .3s; padding:1.5rem; }
+    body.light .project-card { background-color:#fff; border:1px solid #dee2e6; }
+    .project-card:hover { transform:translateY(-8px); box-shadow:0 8px 20px rgba(0,0,0,.6); }
+    .tag { background-color:#ff5722; color:#fff; font-size:.75rem; padding:.4rem .8rem; border-radius:.25rem; margin:.5rem .5rem 0 0; display:inline-block; cursor:pointer; }
+    body.light .tag { background-color:#ffc107; color:#212529; }
+    #searchInput, #skillFilter { background-color:#1f1f1f; border:none; color:#e0e0e0; }
+    body.light #searchInput, body.light #skillFilter { background-color:#fff; border:1px solid #ced4da; color:#212529; }
+    #searchInput::placeholder, #skillFilter::placeholder { color:#888; }
+    .metric-card { background:#1f1f1f; border:none; border-radius:.5rem; padding:2rem; text-align:center; }
+    body.light .metric-card { background:#fff; border:1px solid #dee2e6; }
+    .timeline { position: relative; margin: 2rem 0; padding-left: 60px; }
+    .timeline::before { content: ''; position: absolute; left: 30px; top: 0; bottom: 0; width: 4px; background: #ff5722; }
+    .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 40px; }
+    .timeline-item::before { content: ''; position: absolute; left: 22px; background: #ff5722; border-radius: 50%; width: 16px; height: 16px; top: 4px; }
+    body.light .timeline::before, body.light .timeline-item::before { background: #007bff; }
+    @media (max-width: 576px) { .timeline { padding-left: 40px; } .timeline::before { left: 20px; } .timeline-item { padding-left: 28px; } .timeline-item::before { left: 12px; } }
+    #skills { padding: 2rem 0; }
+    /* Center contact section */
+    #contact .row { justify-content: center; align-items: center; }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Mani Kanta Lokesh</a>
+      <button class="btn btn-outline-light ms-auto me-2" id="themeToggle">Toggle Theme</button>
+      <a class="btn btn-outline-light" href="Mani_kanta_lokesh_Buragadda_Software_Engineer_Resume.pdf" download>Resume</a>
+    </div>
+  </nav>
+  <div class="container py-5">
+    <div class="hero d-flex flex-column flex-md-row align-items-center">
+      <img src="Profile_Picture.jpg" alt="Mani Kanta Lokesh" class="mb-4 mb-md-0" style="width:150px; height:150px; object-fit:cover; border-radius:0.5rem;">
+      <div>
+        <h1>Software Engineer Portfolio</h1>
+        <p>Full-stack development, cloud-native solutions, and data-driven engineering.</p>
+      </div>
+    </div>
+    <section id="education" class="mb-5">
+      <h2>Education</h2>
+      <p><strong>Master of Science in Computer Engineering</strong>, Iowa State University (Jan 2023 – May 2025)<br>GPA: 3.75/4.00</p>
+    </section>
+    <section id="about" class="mb-5">
+      <h2>About Me</h2>
+      <p>I am a passionate Software Engineer with 3+ years of experience designing and implementing scalable applications, APIs, and data pipelines. Skilled in full-stack development - including backend microservices (FastAPI, Flask), frontend integration, and cloud deployments on AWS and Azure.</p>
+      <p>My expertise spans RESTful API design, database modeling (PostgreSQL, MySQL), and automated CI/CD pipelines using GitHub Actions and Docker. I thrive in agile environments, collaborating closely with cross-functional teams to deliver robust solutions that drive business impact.</p>
+    </section>
+    <section id="skills" class="mb-5">
+      <h2>Skills</h2>
+      <input type="text" id="skillFilter" class="form-control mb-3 w-50" placeholder="Filter skills... (comma-separated)" onkeyup="filterSkills()">
+      <div id="skillsContainer" class="mb-2 d-flex flex-wrap"></div>
+      <button id="toggleSkills" class="btn btn-outline-light btn-sm">Show More</button>
+    </section>
+    <section id="metrics" class="mb-5">
+      <h2>Metrics & Impact</h2>
+      <div class="row g-3">
+        <!-- Software Engineering Metrics -->
+        <div class="col-sm-6 col-lg-3">
+          <div class="metric-card">
+            <h3>35%+</h3>
+            <p>Latency Reduction (APIs)</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="metric-card">
+            <h3>15+</h3>
+            <p>Microservices Deployed</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="metric-card">
+            <h3>5K+</h3>
+            <p>Daily Active Users</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="metric-card">
+            <h3>3</h3>
+            <p>Cloud Platforms Integrated</p>
+          </div>
+        </div>
+        <!-- Data Science & Engineering Metrics -->
+        <div class="col-sm-6 col-lg-3">
+          <div class="metric-card">
+            <h3>65K+</h3>
+            <p>Images Processed</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="metric-card">
+            <h3>1M+</h3>
+            <p>Records Handled Weekly</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="metric-card">
+            <h3>99.9%</h3>
+            <p>System Uptime Achieved</p>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="metric-card">
+            <h3>40%</h3>
+            <p>Data Processing Time Reduced</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="timeline" class="mb-5">
+      <h2>Career Timeline</h2>
+      <div class="timeline">
+        <div class="timeline-item"><h5>May 2024 – Mar 2025: Software Engineer & Data Science Co-op at Optimum</h5></div>
+        <div class="timeline-item"><h5>Mar 2023 – Apr 2024: Graduate Research Assistant – Software Engineering at Iowa State University</h5></div>
+        <div class="timeline-item"><h5>Aug 2021 – Apr 2022: Research Assistant – Software Developer at Presidency University</h5></div>
+        <div class="timeline-item"><h5>Jun 2020 – Jan 2022: Database Software Engineer at Dot Com Generations</h5></div>
+      </div>
+    </section>
+    <section id="projects" class="mb-5">
+      <h2>Projects</h2>
+      <div class="mb-3">
+        <button class="btn btn-outline-light me-2 filter-btn active" data-cat="all">All</button>
+        <button class="btn btn-outline-light me-2 filter-btn" data-cat="ml">ML</button>
+        <button class="btn btn-outline-light me-2 filter-btn" data-cat="etl">ETL</button>
+        <button class="btn btn-outline-light me-2 filter-btn" data-cat="api">API</button>
+        <button class="btn btn-outline-light me-2 filter-btn" data-cat="data">Data Eng</button>
+        <button class="btn btn-outline-light me-2 filter-btn" data-cat="ai">AI</button>
+      </div>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="projectContainer"></div>
+    </section>
+    <section id="contact" class="mb-5 text-center">
+      <h2>Contact</h2>
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-5">
+          <form action="mailto:manikantalokeshburagadda@gmail.com" method="POST" class="row g-3">
+            <div class="col-12"><input type="text" class="form-control" name="name" placeholder="Your Name" required /></div>
+            <div class="col-12"><input type="email" class="form-control" name="email" placeholder="Your Email" required /></div>
+            <div class="col-12"><textarea class="form-control" name="message" rows="4" placeholder="Your Message" required></textarea></div>
+            <div class="col-12"><button type="submit" class="btn btn-primary px-5">Send Message</button></div>
+          </form>
+        </div>
+        <div class="col-md-5">
+          <h5>Contact Details</h5>
+          <p><strong>Name:</strong> Mani Kanta Lokesh Buragadda</p>
+          <p><strong>Email:</strong> manikantalokeshburagadda@gmail.com</p>
+          <p><strong>Phone:</strong> +1 9402684710</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer class="text-center py-4">&copy; 2025 Mani Kanta Lokesh Buragadda</footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const skills = ["Python","Java","SQL","JavaScript","AWS","HTML5","CSS3","Bash","FastAPI","Flask","Django","React","Node.js","Spring Boot","Bootstrap","Chart.js","jQuery","Azure","Heroku","Docker","GitHub Actions","CI/CD","Nginx","Gunicorn","Prometheus","Grafana","PostgreSQL","MySQL","SQL Server","MongoDB","SQLite","Snowflake","Apache Spark","Hadoop","Kafka","Databricks","Airflow","Pandas","SQLAlchemy","TensorFlow","PyTorch","Scikit-learn","OpenCV","Transformers","CNN","LSTM","Model Deployment","Git","GitHub","Jira","Notion","Postman","VS Code","Agile/Scrum","System Design","Debugging","Technical Documentation"];
+    let showAll = false;
+    const skillsContainer = document.getElementById('skillsContainer');
+    const filterInput = document.getElementById('skillFilter');
+    const toggleBtn = document.getElementById('toggleSkills');
+    function renderFilteredSkills() {
+      const query = filterInput.value;
+      const queries = query.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+      let filtered = skills.filter(s => queries.length === 0 || queries.some(q => s.toLowerCase().includes(q)));
+      if (!showAll) filtered = filtered.slice(0, 10);
+      skillsContainer.innerHTML = '';
+      filtered.forEach(s => {
+        const span = document.createElement('span'); span.className = 'tag'; span.textContent = s;
+        span.onclick = () => { const current = filterInput.value; filterInput.value = current ? current + ', ' + s : s; renderFilteredSkills(); };
+        skillsContainer.appendChild(span);
+      }); toggleBtn.textContent = showAll ? 'Show Less' : 'Show More';
+    }
+    filterInput.addEventListener('keyup', renderFilteredSkills);
+    toggleBtn.addEventListener('click', () => { showAll = !showAll; renderFilteredSkills(); }); renderFilteredSkills();
+
+    const buttons = document.querySelectorAll('.filter-btn');
+    let selectedCats = new Set(['all']);
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      if (cat === 'all') { selectedCats = new Set(['all']); buttons.forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+      else {
+        if (selectedCats.has('all')) { selectedCats.delete('all'); document.querySelector('.filter-btn[data-cat="all"]').classList.remove('active'); }
+        if (selectedCats.has(cat)) { selectedCats.delete(cat); btn.classList.remove('active'); }
+        else { selectedCats.add(cat); btn.classList.add('active'); }
+        if (selectedCats.size === 0) { selectedCats.add('all'); document.querySelector('.filter-btn[data-cat="all"]').classList.add('active'); }
+      }
+      filterProjects();
+    }));
+    const projects = [
+      // Optimum Projects
+      {
+        title: "Scalable Backend Services",
+        desc: "Built and deployed Python (FastAPI) microservices on AWS EC2, reducing latency by 35% and improving reliability.",
+        tech: ["api","aws","docker"],
+        company: "Optimum"
+      },
+      {
+        title: "Automated ETL & Data Workflows",
+        desc: "Designed and managed ETL pipelines using Azure Data Factory and Python to process over 1M records weekly.",
+        tech: ["etl","azure","python"],
+        company: "Optimum"
+      },
+      {
+        title: "Real-time KPI Dashboards",
+        desc: "Developed Power BI dashboards connected to Snowflake and SQL Server for executive metrics across 5 departments.",
+        tech: ["powerbi","sql","snowflake"],
+        company: "Optimum"
+      },
+      // Iowa State University Projects
+      {
+        title: "Medical Imaging ML Pipeline",
+        desc: "Engineered Spark-based workflows to preprocess 65K+ images and deployed CNN+LSTM models via Flask APIs.",
+        tech: ["spark","pytorch","flask"],
+        company: "Iowa State University"
+      },
+      {
+        title: "Transformer NLP Service",
+        desc: "Integrated BERT/GPT models into FastAPI endpoints for semantic analysis, improving classification accuracy by 18%.",
+        tech: ["nlp","bert","fastapi"],
+        company: "Iowa State University"
+      },
+      // Presidency University Projects
+      {
+        title: "Academic Performance Dashboards",
+        desc: "Built interactive Flask and MySQL dashboards for student analytics, reducing report generation time by 40%.",
+        tech: ["flask","mysql","excel"],
+        company: "Presidency University"
+      },
+      // Dot Com Generations Projects
+      {
+        title: "E-learning Platform APIs",
+        desc: "Developed RESTful APIs in Flask and FastAPI powering an e-learning platform with 5K+ users daily.",
+        tech: ["api","flask","fastapi"],
+        company: "Dot Com Generations"
+      },
+      {
+        title: "Real-time ETL & Analytics",
+        desc: "Engineered real-time data ingestion pipelines using AWS S3, Databricks, and Kafka for user activity logs.",
+        tech: ["aws","databricks","kafka"],
+        company: "Dot Com Generations"
+      }
+    ];
+    const container = document.getElementById('projectContainer');
+    function renderProjects(list) {
+      container.innerHTML = '';
+      list.forEach(p => {
+        const tags = p.tech.map(c => `<span class="tag">${c.toUpperCase()}</span>`).join('');
+        const col = document.createElement('div'); col.className = 'col';
+        col.innerHTML = `
+          <div class="card project-card h-100 d-flex flex-column">
+            <h5 class="card-title text-white">${p.title}</h5>
+            <p class="card-text text-secondary flex-grow-1">${p.desc}</p>
+            <p class="company text-light mb-2"><strong>Company:</strong> ${p.company}</p>
+            <div class="tags-container mb-2 d-flex flex-wrap">${tags}</div>
+          </div>`;
+        container.appendChild(col);
+      });
+    }
+    function filterProjects() {
+      let filtered = [];
+      if (selectedCats.has('all')) filtered = projects;
+      else filtered = projects.filter(p => p.tech.some(t => selectedCats.has(t)));
+      renderProjects(filtered);
+    }
+    renderProjects(projects);
+
+    document.getElementById('themeToggle').addEventListener('click', () => document.body.classList.toggle('light'));
+  </script>
+</body>
+</html>
